@@ -103,6 +103,6 @@ all_measures <- get_measures(grain_sizes, weight_options, measures, statistics)
 write.csv(all_measures, "all_measures.csv")
 
 # OPTIONALLY: If you also want the PP measures that are precomputed to be included, include these lines:
-# corpus_measures <- read.csv("../pp_measures.csv")
+# corpus_measures <- read.csv("../precalculated/pp_measures.csv")
 # all_measures_with_pp <- merge(all_measures, corpus_measures, by = "spelling")
 # write.csv(all_measures_with_pp, "all_measures_with_pp.csv")
