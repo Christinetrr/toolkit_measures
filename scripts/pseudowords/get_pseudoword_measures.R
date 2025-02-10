@@ -1,5 +1,5 @@
-# setwd("replace/with/path/to/pseudoword/folder")
-load("../Toolkit_v2.0.RData")
+# setwd("replace/with/path/to/pseudowords")
+load("../../Toolkit_v2.0.RData")
 pronunciations <- read.csv("pronunciations.csv")
 
 levels <- c("PG", "OR", "ONC", "OC")

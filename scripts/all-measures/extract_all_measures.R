@@ -1,6 +1,6 @@
 # setwd("Replace this string with the path to the all-measures directory of this repo and uncomment")
 # The Toolkit only needs to be loaded once
-load("../Toolkit_v2.0.RData")
+load("../../Toolkit_v2.0.RData")
 
 ### SOME NOTES:
 # If you are supplying your own datasets/corpus, adjust the names of the datasets in the grain_sizes and weight_options lists. The
