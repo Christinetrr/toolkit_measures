@@ -36,6 +36,7 @@ statistics <- c("mean", "median", "max", "min", "sd")
 
 # Extracts the summary statistics for a dataset of the desired grain size and weight, and returns the information corresponding
 # to the desired measure.
+# Note that if you are trying to extract a summary from a dataset of a different name, you will need to edit the paste0 command in this function (changing this to be a parameter soon with full mapping-pipeline release)
 extract_summary <- function(grain, weight, measure) {
   # Create the appropriate dataset name
   dataset <- paste0(grain, weight)
