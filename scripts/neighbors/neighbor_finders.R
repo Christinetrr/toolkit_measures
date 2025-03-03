@@ -38,7 +38,7 @@ edit_distance_matrices <- function(mat1, mat2) {
 # Pronunciations required if not letter distance
 # If provided must be at least one valid pronunciation per item
 get_orthographic_neighbors <- function(item_spellings, item_pronunciations, type="letter", maxdist=1) {
-    n_items <- length(item_spellings)
+    nitems <- length(item_spellings)
     neighbors <- list()
 
     if (type == "letter"){
@@ -77,7 +77,7 @@ get_orthographic_neighbors <- function(item_spellings, item_pronunciations, type
 # Defined for each phonemic level. Specify as "PG", "OC", "OR", "ONC"
 get_phonological_neighbors <- function(item_spellings, 
 item_pronunciations, type, maxdist=1) {
-    n_items <- length(item_spellings)
+    nitems <- length(item_spellings)
     neighbors <- list()
     level_table <- switch(type,
                             PG = all_words_PG,
