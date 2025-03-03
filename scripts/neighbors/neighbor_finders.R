@@ -75,8 +75,7 @@ get_orthographic_neighbors <- function(item_spellings, item_pronunciations, type
 }
 
 # Defined for each phonemic level. Specify as "PG", "OC", "OR", "ONC"
-get_phonological_neighbors <- function(item_spellings, 
-item_pronunciations, type, maxdist=1) {
+get_phonological_neighbors <- function(item_spellings, item_pronunciations, type, maxdist=1) {
     nitems <- length(item_spellings)
     neighbors <- list()
     level_table <- switch(type,
@@ -104,6 +103,40 @@ item_pronunciations, type, maxdist=1) {
     }
 
     return(neighbors)
+}
+
+# Assume words has a spelling column and neighbors_df is a list of dataframes containing spelling and
+# pronunciation columns corresponding to all respective neighbors of words in words in the same order.
+# Produces a dataframe whose columns are "target", "neighbor_spelling", and "neighbor_pronunciation",
+# with all neighbors. Removes duplicate entries (where the value of target is the same as the value
+# of neighbor_pronunciation) as the above functions are inclusive of the zero-distance neighbor.
+create_word_neighbor_df <- function(words, ndf) {
+    df <- data.frame(
+        target = character(),
+        neighbor_spelling = character(),
+        neighbor_pronunciation = character(),
+        stringsAsFactors = FALSE
+    )
+
+    for (i in seq_along(ndf)) {
+        target_word <- words$spelling[i]
+        neighbors_df <- ndf[[i]]
+
+        neighbors_df <- neighbors_df %>%
+            select(spelling, pronunciation) %>%
+            mutate(target = target_word) %>%
+            select(target, spelling, pronunciation)
+
+        colnames(neighbors_df) <- c("target", "neighbor_spelling", "neighbor_pronunciation")
+
+        df <- bind_rows(df, neighbors_df)
+    }
+
+    # get_orthographic_neighbors returns neighbors <= distance, so duplicates are included in the output
+    df <- df %>%
+        filter(target != neighbor_spelling)
+
+    return(df)
 }
 
 # Examples (from Bob, modified to work with these functions
